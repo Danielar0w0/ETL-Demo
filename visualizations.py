@@ -107,6 +107,8 @@ def visualize_covid_data():
     plt.tight_layout()
     plt.show()
 
+    # TODO: Add visualizations related to hospitalizations
+
 
 # Fetch Exchange Rate Data and Plot Currency Comparison
 def visualize_exchange_rate_data():
@@ -178,6 +180,8 @@ def visualize_spacex_data():
     plt.grid(True)
     plt.tight_layout()
     plt.show()
+
+    # TODO: Add visualizations related to rockets
 
 
 def run_all_visualizations():
