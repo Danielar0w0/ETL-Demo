@@ -31,5 +31,18 @@ services:
       - shared_data:/app/shared_data
     command: ["python", "transform_data.py"]
 
+  app_streamlit:
+    build: ./app_streamlit
+    depends_on:
+      db:
+        condition: service_healthy
+      transform_service:
+        condition: service_started
+    ports:
+      - "8501:8501"
+    volumes:
+      - shared_data:/app/shared_data
+    command: ["streamlit", "run", "app.py"]
+
 volumes:
   shared_data:
