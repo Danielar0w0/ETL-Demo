@@ -13,6 +13,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: '4G'
 
   api_service:
     build: ./api_service
@@ -21,6 +26,11 @@ services:
     volumes:
       - shared_data:/app/shared_data
     command: ["python", "extract_data.py"]
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: '2G'
 
   transform_service:
     build: ./transform_service
@@ -30,6 +40,11 @@ services:
     volumes:
       - shared_data:/app/shared_data
     command: ["python", "transform_data.py"]
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: '2G'
 
   app_streamlit:
     build: ./app_streamlit
@@ -43,6 +58,19 @@ services:
     volumes:
       - shared_data:/app/shared_data
     command: ["streamlit", "run", "app.py"]
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: '2G'
 
 volumes:
   shared_data:
+    driver: local
+    driver_opts:
+      type: 'nfs'
+      o: 'addr=host.docker.internal,rw'
+      device: ':shared_data'
+
+networks:
+  etl_network:
