@@ -66,11 +66,3 @@ services:
 
 volumes:
   shared_data:
-    driver: local
-    driver_opts:
-      type: 'nfs'
-      o: 'addr=host.docker.internal,rw'
-      device: ':shared_data'
-
-networks:
-  etl_network:
