@@ -138,7 +138,7 @@ def load_to_postgres(df, table_name):
 
 
 # Load data into SQLite
-def load_to_sqlite(df, db_path="etl_database.sqlite", table_name="weather_data"):
+def load_to_sqlite(df, db_path="/app/sqlite_data/etl_database.sqlite", table_name="weather_data"):
     try:
         conn = sqlite3.connect(db_path)
         df.to_sql(table_name, conn, if_exists='replace', index=False)

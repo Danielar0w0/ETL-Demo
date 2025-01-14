@@ -39,6 +39,7 @@ services:
         condition: service_healthy
     volumes:
       - shared_data:/app/shared_data
+      - sqlite_data:/app/sqlite_data
     command: ["python", "transform_data.py"]
     deploy:
       resources:
@@ -57,6 +58,7 @@ services:
       - "8501:8501"
     volumes:
       - shared_data:/app/shared_data
+      - sqlite_data:/app/sqlite_data
     command: ["streamlit", "run", "app.py"]
     deploy:
       resources:
@@ -66,3 +68,6 @@ services:
 
 volumes:
   shared_data:
+    driver: local
+  sqlite_data:
+    driver: local
